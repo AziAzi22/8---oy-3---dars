@@ -25,7 +25,7 @@ jobs:
         env:
           HOST: ${{ secrets.HOST }}
           USER: ${{ secrets.USERNAME }}
-          APP_DIR: /ci_cd
+          APP_DIR: /home/ubuntu/ci_cd
           PORT: ${{ secrets.PORT }}
         run: |
           ssh $USER@$HOST << 'EOF'
