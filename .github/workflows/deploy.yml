@@ -28,7 +28,7 @@ jobs:
           APP_DIR: /home/ubuntu/ci_cd
           PORT: ${{ secrets.PORT }}
         run: |
-          ssh $USER@$HOST << 'EOF'
+          ssh $USER@$HOST "APP_DIR=$APP_DIR PORT=$PORT" << 'EOF'
             set -e
 
             if [ ! -d "$APP_DIR" ]; then
@@ -37,12 +37,7 @@ jobs:
             fi
 
             cd "$APP_DIR"
-
-            if [ ! -d .git ]; then
-              echo "❌ Repository not cloned properly. Aborting."
-              exit 1
-            fi
-
+            git reset --hard origin/main
             git pull origin main
 
             echo "PORT=$PORT" > .env
